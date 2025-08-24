@@ -4,18 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { set } from "mongoose";
 
 export default function Nav() {
   const { data: session } = useSession();
+
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   useEffect(() => {
-    const setProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
       setProviders(response);
     };
-    setProviders();
+    setUpProviders();
   }, []);
 
   return (
@@ -73,7 +73,7 @@ export default function Nav() {
         {session?.user ? (
           <div className="flex">
             <Image
-              src="assets/images/logo.svg"
+              src="/assets/images/logo.svg"
               width={37}
               height={37}
               alt="profile"
